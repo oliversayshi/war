@@ -28,7 +28,6 @@ public class Hand {
 	
 	public void enqueue(Card x) {
 		
-		
 		arr[last++] = x;
 		size++;
 		
@@ -61,6 +60,25 @@ public class Hand {
 		first = 0;
 		last = 0;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		
+		String printout = "";
+		
+		for (int i = first; i != last ; i++) {
+			if (i == arr.length) {
+				i = 0;
+			}
+			
+			printout += arr[i].value + "";
+			
+		}
+		return printout;
+		
+	}
+	
 	
 	
 }

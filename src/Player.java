@@ -19,6 +19,14 @@ public class Player {
 	public void addCard(Card card) {
 		hand.enqueue(card);
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+	
+	
 	
 	
 
