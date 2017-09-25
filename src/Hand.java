@@ -72,7 +72,7 @@ public class Hand {
 				i = 0;
 			}
 			
-			printout += arr[i].value + "";
+			printout += arr[i].value + ", ";
 			
 		}
 		return printout;

@@ -3,6 +3,7 @@
  */
 
 import java.util.*;
+import java.util.PrimitiveIterator.OfDouble;
 
 import com.sun.glass.ui.SystemClipboard;
 
@@ -47,7 +48,7 @@ public class War {
 		
 		Scanner reader = new Scanner(new File("war.dat"));
 		
-		for (;;) {
+		while (reader.hasNextLine()) {
 			
 			Player p1 = new Player();
 			Player p2 = new Player();
@@ -67,12 +68,15 @@ public class War {
 				p2.addCard(War.getCardFromString(handReader.next()));
 			}
 			
-			System.out.println(p1.hand);
-			System.out.println(p2.hand);
+			//System.out.println(p1.hand);
+			//System.out.println(p2.hand);
 			
 			int turn = 0;
 			
 			while (p1.hand.isEmpty() != true && p2.hand.isEmpty() != true && turn <= 100000) {
+				
+				//System.out.println("Player 1 hand: " + p1.hand);
+				///System.out.println("Player 2 hand: " + p2.hand);
 				
 				turn++;
 				Card card1 = p1.showTopCard();
@@ -86,9 +90,13 @@ public class War {
 				
 				boolean winnerFound = false;
 				
-				while (winnerFound != true) {
-					
+				while (winnerFound != true) {	
+				
 					int winner = compareCards(card1, card2);
+					
+					if (winner == 0) {
+						
+					}
 					
 					if (winner == 1) {
 						winnerFound = true;
@@ -99,6 +107,9 @@ public class War {
 						while (pile.isEmpty() != true)
 							p2.addCard(pile.dequeue());
 					} else if (winner == 0) {
+						pile.enqueue(p1.showTopCard());
+						pile.enqueue(p2.showTopCard());
+						
 						card1 = p1.showTopCard();
 						card2 = p2.showTopCard();
 						
@@ -110,7 +121,7 @@ public class War {
 				
 				
 			}
-			System.out.println(turn);
+			//System.out.println(turn);
 			if (p1.hand.isEmpty() == true) {
 				System.out.println("Player 2 Wins!");
 			} else if (p2.hand.isEmpty() == true) {
@@ -189,6 +200,8 @@ public class War {
 			winner = 1;
 		}else if(playerOneCard.value < playerTwoCard.value){
 			winner = 2;
+		}else if (playerOneCard.value == playerTwoCard.value) {
+			winner = 0;
 		}
 		
 		return winner;
